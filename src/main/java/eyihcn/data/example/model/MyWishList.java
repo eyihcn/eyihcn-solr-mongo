@@ -1,12 +1,14 @@
-package org.springframework.data.example.model;
+package eyihcn.data.example.model;
 
 import java.util.List;
 import java.util.Map;
 
 import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import eyihcn.base.entity.BaseEntity;
-
+@SolrDocument(collection="mywishlist")
 public class MyWishList extends BaseEntity<Integer> implements SearchableMyWishList {
 
 	private static final long serialVersionUID = -4290648075971100781L;
@@ -46,7 +48,7 @@ public class MyWishList extends BaseEntity<Integer> implements SearchableMyWishL
 		this.name = name;
 	}
 
-	// @Transient
+	@Transient
 	@Field(SKU_TO_QTY_LIST_FIELD)
 	private String skuToQtyListJson; // 商品信息
 

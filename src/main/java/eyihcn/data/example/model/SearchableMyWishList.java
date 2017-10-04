@@ -13,19 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.data.example.model;
+package eyihcn.data.example.model;
 
 /**
  * @author Christoph Strobl
  */
-public interface SearchableProduct {
+public interface SearchableMyWishList {
 
-  String ID_FIELD = "id";
-  String NAME_FIELD = "name";
-  String PRICE_FIELD = "price";
-  String AVAILABLE_FIELD = "inStock";
-  String CATEGORY_FIELD = "cat";
-  String WEIGHT_FIELD = "weight";
-  String POPULARITY_FIELD = "popularity";
+	String ID_FIELD = "id";
+	String NAME_FIELD = "name";
+	String SKU_TO_QTY_LIST_FIELD = "skuToQtyListJson";
 
 }

@@ -13,25 +13,26 @@
   CONTEXT SETTINGS
   #####################################
    -->
-  <context:property-placeholder location="classpath:org/springframework/data/solr/example/configuration.properties" ignore-resource-not-found="true" />
+  <context:property-placeholder location="classpath:conf/configuration.properties" ignore-resource-not-found="true" />
 
  <!-- 
   #####################################
   SOLR
   #####################################
  -->
+  <solr:repositories base-package="com.acme.repositories" />
   <solr:solr-client id="solrServer" url="${solr.host}" />
 
   <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate" scope="singleton">
     <constructor-arg ref="solrServer" />
   </bean>
 
-  <bean id="searchRepository" class="org.springframework.data.solr.example.repository.SolrProductRepository">
-    <property name="solrOperations" ref="solrTemplate" />
-  </bean>
+<!--   <bean id="searchRepository" class="org.springframework.data.solr.example.repository.SolrProductRepository"> -->
+<!--     <property name="solrOperations" ref="solrTemplate" /> -->
+<!--   </bean> -->
   
   <bean id="myWishListRepository" class="org.springframework.data.solr.example.repository.SolrMyWishListRepository">
-    <property name="solrOperations" ref="solrTemplate" />
+    <constructor-arg ref="solrTemplate" />
   </bean>
 
 </beans>

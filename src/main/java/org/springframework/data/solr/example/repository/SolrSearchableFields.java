@@ -15,8 +15,9 @@
  */
 package org.springframework.data.solr.example.repository;
 
-import org.springframework.data.example.model.SearchableProduct;
 import org.springframework.data.solr.core.query.Field;
+
+import eyihcn.data.example.model.SearchableProduct;
 
 /**
  * @author Christoph Strobl

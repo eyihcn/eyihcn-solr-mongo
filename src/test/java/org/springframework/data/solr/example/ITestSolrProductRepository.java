@@ -23,13 +23,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.example.model.Product;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.example.repository.SolrProductRepository;
 import org.springframework.data.solr.example.repository.SolrSearchableFields;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import eyihcn.data.example.model.Product;
 
 /**
  * @author Christoph Strobl

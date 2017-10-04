@@ -8,12 +8,13 @@ import java.util.Map;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.example.model.MyWishList;
 import org.springframework.data.solr.example.repository.SolrMyWishListRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.gson.Gson;
+
+import eyihcn.data.example.model.MyWishList;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:org/springframework/data/solr/example/applicationContext.xml")
@@ -24,6 +25,7 @@ public class ITestMyWishListSolrRepository {
 
 	@Test
 	public void testCRUD() {
+		System.out.println(repo.count());
 		Gson gson = new Gson();
 		MyWishList entity = new MyWishList();
 		entity.setId(2);
@@ -35,5 +37,6 @@ public class ITestMyWishListSolrRepository {
 		entity.setSkuToQtyList(skuToQtyList);
 		entity.setSkuToQtyListJson(gson.toJson(skuToQtyList));
 		repo.save(entity);
+//		repo.delete(entity);
 	}
 }

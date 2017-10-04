@@ -8,12 +8,13 @@ import java.util.Map;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.example.model.MyWishList;
-import org.springframework.data.mongo.example.repository.MongoMyWishListRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.gson.Gson;
+
+import eyihcn.data.example.model.MyWishList;
+import eyihcn.sping.data.mongo.repository.impl.example.MongoMyWishListRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:org/springframework/data/solr/example/applicationContext.xml")

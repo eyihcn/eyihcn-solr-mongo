@@ -16,9 +16,10 @@
 package org.springframework.data.solr.example.repository;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.example.model.Product;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.solr.core.query.result.FacetPage;
+
+import eyihcn.data.example.model.Product;
 
 /**
  * @author Christoph Strobl

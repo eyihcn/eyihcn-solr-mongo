@@ -26,8 +26,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.example.model.Product;
-import org.springframework.data.example.model.SearchableProduct;
 import org.springframework.data.solr.core.SolrOperations;
 import org.springframework.data.solr.core.query.PartialUpdate;
 import org.springframework.data.solr.core.query.SimpleQuery;
@@ -37,6 +35,9 @@ import org.springframework.data.solr.example.repository.DerivedSolrProductReposi
 import org.springframework.data.solr.repository.support.SolrRepositoryFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import eyihcn.data.example.model.Product;
+import eyihcn.data.example.model.SearchableProduct;
 
 /**
  * @author Christoph Strobl

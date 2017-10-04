@@ -16,7 +16,6 @@
 package org.springframework.data.solr.example.repository;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.example.model.Product;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.solr.core.query.Criteria;
 import org.springframework.data.solr.core.query.FacetOptions;
@@ -27,6 +26,8 @@ import org.springframework.data.solr.core.query.SimpleField;
 import org.springframework.data.solr.core.query.SimpleQuery;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.repository.support.SimpleSolrRepository;
+
+import eyihcn.data.example.model.Product;
 
 /**
  * @author Christoph Strobl

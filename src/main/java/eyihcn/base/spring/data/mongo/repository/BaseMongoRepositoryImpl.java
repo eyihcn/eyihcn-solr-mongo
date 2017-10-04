@@ -1,4 +1,4 @@
-package eyihcn.base.mongo.repository;
+package eyihcn.base.spring.data.mongo.repository;
 
 import java.io.Serializable;
 
@@ -21,7 +21,7 @@ public class BaseMongoRepositoryImpl<T extends BaseEntity<PK>, PK extends Serial
 	private Class<T> entityClass; // 实体的运行是类
 	private Class<PK> pkClass; // 实体的运行是类
 	private String collectionName;// 创建的数据表的名称是类名的首字母小写
-
+	
 	@SuppressWarnings("unchecked")
 	public BaseMongoRepositoryImpl(MongoEntityInformation<T, PK> metadata, MongoOperations mongoOperations) {
 		super(metadata, mongoOperations);
@@ -31,32 +31,26 @@ public class BaseMongoRepositoryImpl<T extends BaseEntity<PK>, PK extends Serial
 		this.collectionName = _getCollectionName();
 	}
 
-	@Override
 	public Iterable<T> findList(Criteria criteria, int pageSize, int pageNumber, Direction sortDirection, String... sortFields) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public T findOne(Criteria criteria, Direction sortDirection, String... sortFields) {
 		Query query = new Query(criteria);
-		_buildSort(query, sortDirection,sortFields);
+		_buildSort(query, sortDirection, sortFields);
 		return mongoOperations.findOne(query, entityClass, collectionName);
 	}
 
-	@Override
 	public boolean exists(Criteria criteria) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public long count(Criteria criteria) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public boolean delete(Criteria criteria) {
 		// TODO Auto-generated method stub
 		return false;

@@ -18,7 +18,7 @@ package org.springframework.data.solr.example;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.example.model.Product;
+import eyihcn.data.example.model.Product;
 
 
 /**

@@ -19,10 +19,11 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.example.model.Product;
-import org.springframework.data.example.model.SearchableProduct;
 import org.springframework.data.solr.repository.Query;
 import org.springframework.data.solr.repository.SolrCrudRepository;
+
+import eyihcn.data.example.model.Product;
+import eyihcn.data.example.model.SearchableProduct;
 
 /**
  * @author Christoph Strobl
