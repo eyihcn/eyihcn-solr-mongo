@@ -9,4 +9,6 @@ public interface MongoMyWishListRepository extends BaseMongoRepository<MyWishLis
 
 
 	List<MyWishList> findByName(String name);
+
+	List<MyWishList> findByNameLike(String name);
 }

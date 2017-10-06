@@ -4,11 +4,19 @@ import java.io.Serializable;
 
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.query.MongoEntityInformation;
 import org.springframework.data.mongodb.repository.support.MongoRepositoryFactory;
 import org.springframework.data.mongodb.repository.support.MongoRepositoryFactoryBean;
+import org.springframework.data.mongodb.repository.support.QuerydslMongoPredicateExecutor;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.querydsl.QuerydslUtils;
+import org.springframework.data.repository.core.RepositoryInformation;
+import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.RepositoryFactorySupport;
 
 import eyihcn.base.entity.BaseEntity;
+import eyihcn.base.spring.data.mongo.repository.BaseMongoRepositoryImpl;
+
 /**
  * 用于生成自扩展的Repository方法
  */
@@ -32,26 +40,25 @@ public class CustomMongoRepositoryFactoryBean<T extends MongoRepository<S, ID>, 
 			this.mongoOperations = mongoOperations;
 		}
 
-//		@Override
-//		protected Object getTargetRepository(RepositoryInformation information) {
-//
-//			Class<?> repositoryInterface = information.getRepositoryInterface();
-//			MongoEntityInformation<?, Serializable> entityInformation = getEntityInformation(information.getDomainType());
-//			if (isQueryDslRepository(repositoryInterface)) {
-//				return new QueryDslMongoRepository(entityInformation, mongoOperations);
-//			} else {
-//				return new BaseMongoRepositoryImpl<S, ID>((MongoEntityInformation<S, ID>) entityInformation, this.mongoOperations);
-//			}
-//		}
-//
-//
-//		private static boolean isQueryDslRepository(Class<?> repositoryInterface) {
-//			return QUERY_DSL_PRESENT && QueryDslPredicateExecutor.class.isAssignableFrom(repositoryInterface);
-//		}
+		@Override
+		protected Object getTargetRepository(RepositoryInformation information) {
 
-//		@Override
-//		protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {
-//			return isQueryDslRepository(metadata.getRepositoryInterface()) ? QueryDslMongoRepository.class : BaseMongoRepositoryImpl.class;
-//		}
+			Class<?> repositoryInterface = information.getRepositoryInterface();
+			MongoEntityInformation<?, Serializable> entityInformation = getEntityInformation(information.getDomainType());
+			if (isQueryDslRepository(repositoryInterface)) {
+				return new QuerydslMongoPredicateExecutor(entityInformation, mongoOperations);
+			} else {
+				return new BaseMongoRepositoryImpl<S, ID>((MongoEntityInformation<S, ID>) entityInformation, this.mongoOperations);
+			}
+		}
+
+		private static boolean isQueryDslRepository(Class<?> repositoryInterface) {
+			return QuerydslUtils.QUERY_DSL_PRESENT && QuerydslPredicateExecutor.class.isAssignableFrom(repositoryInterface);
+		}
+
+		@Override
+		protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {
+			return isQueryDslRepository(metadata.getRepositoryInterface()) ? QuerydslMongoPredicateExecutor.class : BaseMongoRepositoryImpl.class;
+		}
 	}
 }

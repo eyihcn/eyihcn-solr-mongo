@@ -16,32 +16,42 @@
 package org.springframework.data.solr.example;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import eyihcn.data.example.model.Product;
+import com.google.gson.Gson;
+
+import eyihcn.data.example.model.MyWishList;
 
 
 /**
  * @author Christoph Strobl
  */
 public abstract class AbstractSolrIntegrationTest {
+	Gson gson = new Gson();
 
-  protected List<Product> createProductList(int nrProducts) {
-    List<Product> products = new ArrayList<Product>(nrProducts);
-    for (int i = 0; i < nrProducts; i++) {
-      products.add(createProduct(i));
+	protected List<MyWishList> createMyWishListList(int nrMyWishLists) {
+		List<MyWishList> MyWishLists = new ArrayList<MyWishList>(nrMyWishLists);
+		for (int i = 0; i < nrMyWishLists; i++) {
+			MyWishLists.add(createMyWishList(i));
     }
-    return products;
+		return MyWishLists;
   }
 
-  protected Product createProduct(int id) {
-    Product product = new Product();
-    product.setId(Integer.toString(id));
-    product.setAvailable(id % 2 == 0);
-    product.setName("product-" + id);
-    product.setPopularity(id * 10);
-    product.setPrice((float) id * 100);
-    product.setWeight((float) id * 2);
-    return product;
+	protected MyWishList createMyWishList(int id) {
+		MyWishList MyWishList = new MyWishList();
+		MyWishList.setId(id);
+		List<Map<String, Object>> skuToQtyList = new ArrayList<Map<String, Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sku", "sku" + id);
+		map.put("qty", id);
+		skuToQtyList.add(map);
+		MyWishList.setSkuToQtyList(skuToQtyList);
+		MyWishList.setSkuToQtyListJson(gson.toJson(skuToQtyList));
+		MyWishList.setName("MyWishList|" + id);
+		MyWishList.setPrice((float) id * 100);
+
+		return MyWishList;
   }
 }

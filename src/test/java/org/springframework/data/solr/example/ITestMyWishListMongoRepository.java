@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,21 @@ public class ITestMyWishListMongoRepository {
 
 	@Autowired
 	MongoMyWishListRepository repo;
+
+	@BeforeClass
+	public void setUpClass() {
+		repo.deleteAll();
+	}
+
+	@AfterClass
+	public void tearDownClass() {
+		// repo.deleteAll();
+	}
+
+	@After
+	public void tearDown() {
+		repo.deleteAll();
+	}
 
 	@Test
 	public void testCRUD() {

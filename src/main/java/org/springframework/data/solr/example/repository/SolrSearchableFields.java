@@ -17,16 +17,14 @@ package org.springframework.data.solr.example.repository;
 
 import org.springframework.data.solr.core.query.Field;
 
-import eyihcn.data.example.model.SearchableProduct;
+import eyihcn.data.example.model.SearchableMyWishList;
 
 /**
  * @author Christoph Strobl
  */
 public enum SolrSearchableFields implements Field {
 
-	ID(SearchableProduct.ID_FIELD), NAME(SearchableProduct.NAME_FIELD), PRICE(SearchableProduct.PRICE_FIELD), AVAILABLE(
-			SearchableProduct.AVAILABLE_FIELD), CATEGORY(SearchableProduct.CATEGORY_FIELD), WEIGHT(
-			SearchableProduct.WEIGHT_FIELD), POPULARITY(SearchableProduct.POPULARITY_FIELD);
+	ID(SearchableMyWishList.ID_FIELD), NAME(SearchableMyWishList.NAME_FIELD), PRICE(SearchableMyWishList.PRICE_FIELD);
 
 	private final String fieldName;
 
@@ -34,7 +32,6 @@ public enum SolrSearchableFields implements Field {
 		this.fieldName = fieldName;
 	}
 
-	@Override
 	public String getName() {
 		return fieldName;
 	}

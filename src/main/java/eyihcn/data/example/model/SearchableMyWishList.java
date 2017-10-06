@@ -22,6 +22,7 @@ public interface SearchableMyWishList {
 
 	String ID_FIELD = "id";
 	String NAME_FIELD = "name";
+	String PRICE_FIELD = "price";
 	String SKU_TO_QTY_LIST_FIELD = "skuToQtyListJson";
 
 }
