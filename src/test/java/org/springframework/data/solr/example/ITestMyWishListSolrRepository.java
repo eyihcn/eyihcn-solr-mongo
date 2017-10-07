@@ -32,6 +32,7 @@ public class ITestMyWishListSolrRepository extends AbstractSolrIntegrationTest {
 	public void setUpClass() {
 		repo.deleteAll();
 		List<MyWishList> entities = createMyWishListList(10);
+		System.out.println(".....createMyWishListList........");
 		repo.saveAll(entities);
 	}
 	//
@@ -47,7 +48,7 @@ public class ITestMyWishListSolrRepository extends AbstractSolrIntegrationTest {
 
 	@Test
 	public void testFindLike() {
-		List<MyWishList> findByNameLike = repo.findByNameLike("Wish");
+		MyWishList findByNameLike = repo.findOneByNameLike("MyWish");
 		Page<MyWishList> findList = repo.findList(Criteria.where(SolrSearchableFields.NAME.getName()).contains("Wish"), null);
 	}
 
@@ -55,7 +56,7 @@ public class ITestMyWishListSolrRepository extends AbstractSolrIntegrationTest {
 	public void testFind() {
 		List<MyWishList> entities = createMyWishListList(10);
 		repo.saveAll(entities);
-		List<MyWishList> findByName = repo.findByName(entities.get(0).getName());
+		List<MyWishList> findByName = repo.findListByName(entities.get(0).getName());
 		MyWishList findOne = repo.findOne(Criteria.where(SolrSearchableFields.NAME.getName()).is(entities.get(0).getName()));
 		System.out.println(findOne);
 	}
@@ -96,7 +97,7 @@ public class ITestMyWishListSolrRepository extends AbstractSolrIntegrationTest {
 	public void testQuery() {
 		List<MyWishList> entities = createMyWishListList(10);
 		repo.saveAll(entities);
-		System.out.println(repo.findByName("MyWishList-1").get(0));
+		System.out.println(repo.findListByName("MyWishList-1").get(0));
 
 		Pageable pageable = new SolrPageRequest(0, 1);
 		Page<MyWishList> findAll = repo.findAll(pageable);

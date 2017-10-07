@@ -10,7 +10,7 @@ import eyihcn.data.example.model.MyWishList;
 @Repository
 public interface SolrMyWishListRepository extends BaseSolrRepository<MyWishList, Integer> {
 
-	List<MyWishList> findByName(String name);
+	List<MyWishList> findListByName(String name);
 
-	List<MyWishList> findByNameLike(String name);
+	MyWishList findOneByNameLike(String name);
 }
