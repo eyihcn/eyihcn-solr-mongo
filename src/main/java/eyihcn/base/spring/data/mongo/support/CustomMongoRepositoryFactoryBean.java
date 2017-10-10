@@ -7,9 +7,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.query.MongoEntityInformation;
 import org.springframework.data.mongodb.repository.support.MongoRepositoryFactory;
 import org.springframework.data.mongodb.repository.support.MongoRepositoryFactoryBean;
-import org.springframework.data.mongodb.repository.support.QuerydslMongoPredicateExecutor;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-import org.springframework.data.querydsl.QuerydslUtils;
 import org.springframework.data.repository.core.RepositoryInformation;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.RepositoryFactorySupport;
@@ -23,9 +20,6 @@ import eyihcn.base.spring.data.mongo.repository.BaseMongoRepositoryImpl;
 @SuppressWarnings("rawtypes")
 public class CustomMongoRepositoryFactoryBean<T extends MongoRepository<S, ID>, S extends BaseEntity<ID>, ID extends Serializable> extends MongoRepositoryFactoryBean<T, S, ID> {
 
-	public CustomMongoRepositoryFactoryBean(Class<? extends T> repositoryInterface) {
-		super(repositoryInterface);
-	}
 
 	@Override
 	protected RepositoryFactorySupport getFactoryInstance(MongoOperations operations) {

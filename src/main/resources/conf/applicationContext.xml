@@ -24,15 +24,20 @@
  -->
   <solr:solr-client id="solrClient" url="${solr.host}" />
   
+  <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
+        <constructor-arg ref="solrClient" />
+        <constructor-arg name="core" value="mywishlist" />
+    </bean>
+    
   <solr:repositories base-package="org.springframework.data.solr.example.repository" 
   solr-client-ref="solrClient"
   factory-class="eyihcn.base.spring.data.mongo.support.CustomSolrRepositoryFactoryBean" />
 
-<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-        <constructor-arg name="mongoClient" ref="mongo"/>
-        <constructor-arg name="databaseName" value="jtomtoperp"/>
+<!-- <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"> -->
+<!--         <constructor-arg name="mongoClient" ref="mongo"/> -->
+<!--         <constructor-arg name="databaseName" value="jtomtoperp"/> -->
 <!--         <constructor-arg name="userCredentials" ref="mongoCredentials"/> -->
-    </bean>
+<!--     </bean> -->
 
 <!--     <bean id="mongoCredentials" class="org.springframework.data.authentication.UserCredentials"> -->
 <!--         <constructor-arg name="username" value="${mongo.username}" /> -->
@@ -47,14 +52,14 @@
 <!--         auto-connect-retry="true" /> -->
 <!--     </mongo:mongo> -->
     
-  <mongo:mongo-client id="mongo" host="${mongo.host}" port="${mongo.port}">
+<!--   <mongo:mongo-client id="mongo" host="${mongo.host}" port="${mongo.port}"> -->
   	
 <!--         <mongo:client-options connections-per-host="10" -->
 <!--             threads-allowed-to-block-for-connection-multiplier="100" -->
 <!--             connect-timeout="1000"  -->
 <!--             max-wait-time="1500"   -->
 <!--             /> -->
-      </mongo:mongo-client> 
+<!--       </mongo:mongo-client>  -->
 
 
 
