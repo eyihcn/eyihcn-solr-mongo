@@ -24,9 +24,7 @@
  -->
   <solr:solr-client id="solrClient" url="${solr.host}" />
   
-  <solr:repositories base-package="org.springframework.data.solr.example.repository" 
-  solr-client-ref="solrClient"
-  factory-class="eyihcn.base.spring.data.mongo.support.CustomSolrRepositoryFactoryBean" />
+  <solr:repositories base-package="org.springframework.data.solr.example.repository"/>
 
 <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg name="mongoClient" ref="mongo"/>
@@ -55,7 +53,27 @@
 <!--             max-wait-time="1500"   -->
 <!--             /> -->
       </mongo:mongo-client> 
+      
+<!--       <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate"> -->
+<!--         <constructor-arg name="solrClient" ref="solrClient"/> -->
+<!--     </bean> -->
+
+<!-- 	<bean id="solrDao" class="eyihcn.base.spring.data.solr.repository.SolrDao"> -->
+<!--        <property name="solrTemplate" ref="solrTemplate" /> -->
+<!--     </bean> -->
 
 
+<solr:solr-client id="solrServer" url="${solr.host}" />
 
+  <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate" scope="singleton">
+    <constructor-arg ref="solrServer" />
+  </bean>
+
+  <bean id="searchRepository" class="org.springframework.data.solr.example.repository.SolrProductRepository">
+    <property name="solrOperations" ref="solrTemplate" />
+  </bean>
+  
+  <bean id="myWishListRepository" class="org.springframework.data.solr.example.repository.SolrMyWishListRepository">
+    <property name="solrOperations" ref="solrTemplate" />
+  </bean>
 </beans>

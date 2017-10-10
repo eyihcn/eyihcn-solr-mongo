@@ -4,18 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.solr.client.solrj.beans.Field;
-import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import com.google.gson.Gson;
 
 import eyihcn.base.entity.BaseEntity;
 
-@SolrDocument(collection = "mywishlist")
 public class MyWishList extends BaseEntity<Integer> implements SearchableMyWishList {
 
-	Gson gson = new Gson();
+	private static final long serialVersionUID = 5692384326770093398L;
 
-	private static final long serialVersionUID = -4290648075971100781L;
+	Gson gson = new Gson();
 
 	@Field(ID_FIELD)
 	private Integer id;
@@ -75,6 +73,5 @@ public class MyWishList extends BaseEntity<Integer> implements SearchableMyWishL
 	public void setSkuToQtyList(List<Map<String, Object>> skuToQtyList) {
 		this.skuToQtyList = skuToQtyList;
 	}
-
 
 }

@@ -1,16 +1,9 @@
 package org.springframework.data.solr.example.repository;
 
-import java.util.List;
+import org.springframework.data.solr.repository.support.SimpleSolrRepository;
 
-import org.springframework.stereotype.Repository;
-
-import eyihcn.base.spring.data.solr.repository.BaseSolrRepository;
 import eyihcn.data.example.model.MyWishList;
 
-@Repository
-public interface SolrMyWishListRepository extends BaseSolrRepository<MyWishList, Integer> {
+public class SolrMyWishListRepository extends SimpleSolrRepository<MyWishList, Integer> {
 
-	List<MyWishList> findListByName(String name);
-
-	MyWishList findOneByNameLike(String name);
 }

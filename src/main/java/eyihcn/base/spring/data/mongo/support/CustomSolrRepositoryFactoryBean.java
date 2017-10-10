@@ -16,10 +16,6 @@ import eyihcn.base.spring.data.solr.repository.BaseSolrRepositoryImpl;
 public class CustomSolrRepositoryFactoryBean<T extends Repository<S, ID>, S extends BaseEntity<ID>, ID extends Serializable> extends SolrRepositoryFactoryBean<T, S, ID> {
 
 
-	public CustomSolrRepositoryFactoryBean(Class<T> repositoryInterface) {
-		super(repositoryInterface);
-	}
-
 	@Override
 	protected RepositoryFactorySupport doCreateRepositoryFactory() {
 		return new CustomSolrRepositoryFactory(getSolrOperations());
@@ -36,6 +32,7 @@ public class CustomSolrRepositoryFactoryBean<T extends Repository<S, ID>, S exte
 
 		@Override
 		protected Object getTargetRepository(RepositoryInformation metadata) {
+
 			return new BaseSolrRepositoryImpl<T, ID>(solrOperations, (Class<T>) metadata.getDomainType());
 			// return super.getTargetRepository(metadata);
 		}
