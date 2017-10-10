@@ -1,58 +1,62 @@
 package org.springframework.data.solr.example;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import org.bson.Document;
 import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.google.gson.Gson;
-
-import eyihcn.data.example.model.MyWishList;
-import eyihcn.sping.data.mongo.repository.impl.example.MongoMyWishListRepository;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.FindOneAndUpdateOptions;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:org/springframework/data/solr/example/applicationContext.xml")
+@ContextConfiguration("classpath:conf/applicationContext.xml")
 public class ITestMyWishListMongoRepository {
 
 	@Autowired
-	MongoMyWishListRepository repo;
+	MongoTemplate mongoTemplate;
 
-	@BeforeClass
-	public void setUpClass() {
-		repo.deleteAll();
-	}
-
-	@AfterClass
-	public void tearDownClass() {
-		// repo.deleteAll();
-	}
 
 	@After
 	public void tearDown() {
-		repo.deleteAll();
 	}
 
 	@Test
-	public void testCRUD() {
-		Gson gson = new Gson();
-		MyWishList entity = new MyWishList();
-		entity.setId(1);
-		List<Map<String, Object>> skuToQtyList = new ArrayList<Map<String, Object>>();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("sku", "sku1");
-		map.put("qty", 2);
-		skuToQtyList.add(map);
-		entity.setSkuToQtyList(skuToQtyList);
-		entity.setSkuToQtyListJson(gson.toJson(skuToQtyList));
-		repo.save(entity);
+	public void testMongoTemplate() {
+		System.out.println(mongoTemplate);
+		
+		
+		String seq_name = "mywishList";
+		String sequence_collection = "seq";
+		String sequence_field = "seq";
+
+		MongoCollection<Document> seq = this.mongoTemplate.getCollection(sequence_collection);
+		Document update = new Document("$inc", new Document(sequence_field, Integer.valueOf(1)));
+		FindOneAndUpdateOptions findOneAndUpdateOptions = new FindOneAndUpdateOptions();
+		findOneAndUpdateOptions.upsert(true);
+		Document findOneAndUpdate = seq.findOneAndUpdate(Filters.eq("_id", seq_name), update, findOneAndUpdateOptions);
+
+		String object = findOneAndUpdate.get(sequence_field).toString();
 	}
+
+	// public String getNextId(String seq_name) {
+	// String sequence_collection = "seq";
+	// String sequence_field = "seq";
+	//
+	// DBCollection seq = this.mongoTemplate.getCollection(sequence_collection);
+	//
+	// DBObject query = new BasicDBObject();
+	// query.put("_id", seq_name);
+	//
+	// DBObject change = new BasicDBObject(sequence_field, Integer.valueOf(1));
+	// DBObject update = new BasicDBObject("$inc", change);
+	//
+	// DBObject res = seq.findAndModify(query, new BasicDBObject(), new
+	// BasicDBObject(), false, update, true, true);
+	// return res.get(sequence_field).toString();
+	// }
 }

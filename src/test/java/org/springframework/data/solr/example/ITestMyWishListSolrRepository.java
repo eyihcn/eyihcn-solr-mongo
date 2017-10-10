@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +27,13 @@ public class ITestMyWishListSolrRepository extends AbstractSolrIntegrationTest {
 	@Autowired
 	SolrMyWishListRepository repo;
 
-	@Before
-	public void setUpClass() {
-		repo.deleteAll();
-		List<MyWishList> entities = createMyWishListList(10);
-		System.out.println(".....createMyWishListList........");
-		repo.saveAll(entities);
-	}
+	// @Before
+	// public void setUpClass() {
+	// repo.deleteAll();
+	// List<MyWishList> entities = createMyWishListList(10);
+	// System.out.println(".....createMyWishListList........");
+	// repo.saveAll(entities);
+	// }
 	//
 	// @AfterClass
 	// public void tearDownClass() {
@@ -47,9 +46,20 @@ public class ITestMyWishListSolrRepository extends AbstractSolrIntegrationTest {
 	}
 
 	@Test
+	public void testFindOne() {
+
+		Iterable<MyWishList> findAll = repo.findAll(new SolrPageRequest(0, 1, Direction.DESC, SolrSearchableFields.PRICE.getName()));
+	}
+
+	@Test
+	public void testDeleteAll() {
+		repo.deleteAll();
+	}
+
+	@Test
 	public void testFindLike() {
 		MyWishList findByNameLike = repo.findOneByNameLike("MyWish");
-		Page<MyWishList> findList = repo.findList(Criteria.where(SolrSearchableFields.NAME.getName()).contains("Wish"), null);
+		Page<MyWishList> findList = repo.findList(Criteria.where(SolrSearchableFields.NAME.getName()).contains("Wish").and(Criteria.where(SolrSearchableFields.PRICE).is(200)), null);
 	}
 
 	@Test
