@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,19 @@ import com.google.gson.Gson;
 import eyihcn.data.example.model.MyWishList;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:org/springframework/data/solr/example/applicationContext.xml")
-public class ITestMyWishListSolrRepository {
+@ContextConfiguration("classpath:conf/applicationContext.xml")
+public class ITestMyWishListSolrRepository extends AbstractSolrIntegrationTest{
 
 	@Autowired
 	SolrMyWishListRepository repo;
 
+	@Before
+	public void setUp () {
+		repo.deleteAll();
+		List<MyWishList> createMyWishListList = createMyWishListList(10);
+		repo.save(createMyWishListList);
+	}
+	
 	@Test
 	public void testDelete() {
 		repo.delete(0);

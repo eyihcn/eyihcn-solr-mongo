@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import com.google.gson.Gson;
 
 import eyihcn.base.entity.BaseEntity;
-
+@SolrDocument(solrCoreName="mywishlist")
 public class MyWishList extends BaseEntity<Integer> implements SearchableMyWishList {
 
 	private static final long serialVersionUID = 5692384326770093398L;

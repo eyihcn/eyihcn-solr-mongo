@@ -20,9 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.data.solr.example.repository.MyWishList;
-
 import com.google.gson.Gson;
+
+import eyihcn.data.example.model.MyWishList;
 
 
 
