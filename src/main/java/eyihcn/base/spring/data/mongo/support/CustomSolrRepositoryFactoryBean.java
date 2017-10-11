@@ -39,11 +39,8 @@ public class CustomSolrRepositoryFactoryBean<T extends Repository<S, ID>, S exte
 
 		@Override
 		protected Object getTargetRepository(RepositoryInformation metadata) {
-<<<<<<< HEAD
-
-=======
-			((SolrTemplate)solrOperations).setSolrCore(SolrClientUtils.resolveSolrCoreName(metadata.getDomainType()));
->>>>>>> e0dfa8f010b28dd2547115a0109596b9a50ebd59
+			String resolveSolrCoreName = SolrClientUtils.resolveSolrCoreName(metadata.getDomainType());
+			((SolrTemplate) solrOperations).setSolrCore(resolveSolrCoreName);
 			return new BaseSolrRepositoryImpl<T, ID>(solrOperations, (Class<T>) metadata.getDomainType());
 			// return super.getTargetRepository(metadata);
 		}

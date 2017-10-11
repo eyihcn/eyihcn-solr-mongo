@@ -24,8 +24,6 @@ import com.google.gson.Gson;
 
 import eyihcn.data.example.model.MyWishList;
 
-
-
 /**
  * @author Christoph Strobl
  */
@@ -36,9 +34,9 @@ public abstract class AbstractSolrIntegrationTest {
 		List<MyWishList> MyWishLists = new ArrayList<MyWishList>(nrMyWishLists);
 		for (int i = 0; i < nrMyWishLists; i++) {
 			MyWishLists.add(createMyWishList(i));
-    }
+		}
 		return MyWishLists;
-  }
+	}
 
 	protected MyWishList createMyWishList(int id) {
 		MyWishList MyWishList = new MyWishList();
@@ -54,5 +52,5 @@ public abstract class AbstractSolrIntegrationTest {
 		MyWishList.setPrice((float) id * 100);
 
 		return MyWishList;
-  }
+	}
 }

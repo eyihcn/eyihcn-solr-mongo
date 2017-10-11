@@ -18,8 +18,10 @@ import org.springframework.util.Assert;
 
 import eyihcn.base.entity.BaseEntity;
 
+
 public class BaseSolrRepositoryImpl<T extends BaseEntity<PK>, PK extends Serializable> extends SimpleSolrRepository<T, PK> implements BaseSolrRepository<T, PK> {
 	
+	private static final String DEFAULT_ID_FIELD = "id";
 	
 	public BaseSolrRepositoryImpl(SolrEntityInformation<T, ?> metadata, SolrOperations solrOperations) {
 		super(metadata, solrOperations);
@@ -35,6 +37,13 @@ public class BaseSolrRepositoryImpl<T extends BaseEntity<PK>, PK extends Seriali
 		Assert.notNull(criteria, "criteria can not be  'null'");
 
 		return (S) getSolrOperations().queryForPage( new SimpleQuery(criteria, pageable), getEntityClass());
+	}
+
+	public T findById(PK id) {
+
+		Assert.notNull(id, "id can not be  'null'");
+
+		return findOne(Criteria.where(DEFAULT_ID_FIELD).is(id));
 	}
 
 	public T findOne(Criteria criteria,  Pageable pageable) {
