@@ -23,7 +23,18 @@
   #####################################
  -->
   
+<<<<<<< HEAD
 <!--   <solr:repositories base-package="org.springframework.data.solr.example.repository"/> -->
+=======
+  <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
+        <constructor-arg ref="solrClient" />
+        <constructor-arg name="core" value="mywishlist" />
+    </bean>
+    
+  <solr:repositories base-package="org.springframework.data.solr.example.repository" 
+  solr-client-ref="solrClient"
+  factory-class="eyihcn.base.spring.data.mongo.support.CustomSolrRepositoryFactoryBean" />
+>>>>>>> e0dfa8f010b28dd2547115a0109596b9a50ebd59
 
 <!-- <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"> -->
 <!--         <constructor-arg name="mongoClient" ref="mongo"/> -->
@@ -45,16 +56,23 @@
 <!--     </mongo:mongo> -->
     
 <!--   <mongo:mongo-client id="mongo" host="${mongo.host}" port="${mongo.port}"> -->
+<<<<<<< HEAD
+=======
+  	
+>>>>>>> e0dfa8f010b28dd2547115a0109596b9a50ebd59
 <!--         <mongo:client-options connections-per-host="10" -->
 <!--             threads-allowed-to-block-for-connection-multiplier="100" -->
 <!--             connect-timeout="1000"  -->
 <!--             max-wait-time="1500"   -->
 <!--             /> -->
 <!--       </mongo:mongo-client>  -->
+<<<<<<< HEAD
       
 <!--       <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate"> -->
 <!--         <constructor-arg name="solrClient" ref="solrClient"/> -->
 <!--     </bean> -->
+=======
+>>>>>>> e0dfa8f010b28dd2547115a0109596b9a50ebd59
 
 <solr:solr-client id="solrClient" url="${solr.host}" />
 

@@ -6,4 +6,5 @@ import eyihcn.data.example.model.MyWishList;
 
 public class SolrMyWishListRepository extends SimpleSolrRepository<MyWishList, Integer> {
 
+
 }
