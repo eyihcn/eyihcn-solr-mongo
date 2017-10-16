@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 
  * @author chenyi
- * @version Apr 30, 20166:30:09 PM
+ * @version Apr 30, 2016 6:30:09 PM
  * @description 抽象基类，便于操作公共ID
  */
 public abstract class BaseEntity<PK extends Serializable> implements Serializable {

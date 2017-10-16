@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 
 import eyihcn.base.entity.BaseEntity;
 
-@SolrDocument(collection = "mywishlist")
+@SolrDocument(collection = "wishlist")
 public class MyWishList extends BaseEntity<Integer> implements SearchableMyWishList {
 
 	Gson gson = new Gson();

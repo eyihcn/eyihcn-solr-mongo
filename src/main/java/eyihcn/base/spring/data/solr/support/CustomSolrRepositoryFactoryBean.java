@@ -1,4 +1,4 @@
-package eyihcn.base.spring.data.mongo.support;
+package eyihcn.base.spring.data.solr.support;
 
 import java.io.Serializable;
 
@@ -20,6 +20,7 @@ public class CustomSolrRepositoryFactoryBean<T extends Repository<S, ID>, S exte
 		super(repositoryInterface);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected RepositoryFactorySupport doCreateRepositoryFactory() {
 		return new CustomSolrRepositoryFactory(getSolrOperations());
@@ -34,6 +35,7 @@ public class CustomSolrRepositoryFactoryBean<T extends Repository<S, ID>, S exte
 			this.solrOperations = solrOperations;
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		protected Object getTargetRepository(RepositoryInformation metadata) {
 			return new BaseSolrRepositoryImpl<T, ID>(solrOperations, (Class<T>) metadata.getDomainType());

@@ -40,6 +40,7 @@ public class CustomMongoRepositoryFactoryBean<T extends MongoRepository<S, ID>, 
 			this.mongoOperations = mongoOperations;
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		protected Object getTargetRepository(RepositoryInformation information) {
 
